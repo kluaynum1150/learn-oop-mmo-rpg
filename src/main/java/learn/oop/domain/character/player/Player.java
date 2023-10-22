@@ -1,12 +1,13 @@
 package learn.oop.domain.character.player;
 
+import learn.oop.domain.behavior.attack.Attackable;
 import learn.oop.domain.character.Character;
 import learn.oop.domain.items.armor.Armor;
 import learn.oop.domain.items.weapon.Weapon;
 import learn.oop.domain.jobs.Job;
 import learn.oop.domain.jobs.novice.Novice;
 
-public class Player extends Character {
+public class Player extends Character implements Attackable {
     private int defenceScore;
     private int attackScore;
     private Job job;
@@ -25,11 +26,6 @@ public class Player extends Character {
         this.attackScore = 5;
         this.defenceScore = 5;
         this.job = new Novice();
-    }
-
-    @Override
-    public void gotAttack() {
-
     }
 
     public int getDefenceScore() {
@@ -70,5 +66,15 @@ public class Player extends Character {
 
     public void setArmor(Armor armor) {
         this.armor = armor;
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
+    @Override
+    public void gotAttack() {
+
     }
 }

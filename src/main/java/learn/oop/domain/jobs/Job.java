@@ -1,15 +1,15 @@
 package learn.oop.domain.jobs;
 
-import learn.oop.domain.behavior.attack.Attackable;
+import learn.oop.domain.behavior.attack.AttackType;
 
 public abstract class Job {
-    private final Attackable attackType;
+    private final AttackType attackType;
 
-    protected Job(Attackable attackType) {
+    protected Job(AttackType attackType) {
         this.attackType = attackType;
     }
 
-    public Attackable getAttackType() {
+    public AttackType getAttackType() {
         return attackType;
     }
 }

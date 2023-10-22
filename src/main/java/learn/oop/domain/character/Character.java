@@ -14,8 +14,6 @@ public abstract class Character {
         this.hp = hp;
     }
 
-    public abstract void gotAttack();
-
     public boolean isDied() {
         return this.hp <= 0;
     }

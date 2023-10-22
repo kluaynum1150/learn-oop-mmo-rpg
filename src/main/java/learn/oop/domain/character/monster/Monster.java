@@ -1,8 +1,9 @@
 package learn.oop.domain.character.monster;
 
+import learn.oop.domain.behavior.attack.Attackable;
 import learn.oop.domain.character.Character;
 
-public class Monster extends Character {
+public class Monster extends Character implements Attackable {
     private int physicalDefend;
     private int magicDefend;
     private int attackScore;
@@ -12,11 +13,6 @@ public class Monster extends Character {
         this.physicalDefend = physicalDefend;
         this.magicDefend = magicDefend;
         this.attackScore = attackScore;
-    }
-
-    @Override
-    public void gotAttack() {
-
     }
 
     public int getPhysicalDefend() {
@@ -41,5 +37,15 @@ public class Monster extends Character {
 
     public void setAttackScore(int attackScore) {
         this.attackScore = attackScore;
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
+    @Override
+    public void gotAttack() {
+
     }
 }
