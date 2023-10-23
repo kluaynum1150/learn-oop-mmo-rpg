@@ -10,6 +10,6 @@ public class MagicStaff extends Weapon {
 
     @Override
     public void use() {
-
+        System.out.println("Use " + this.getName());
     }
 }

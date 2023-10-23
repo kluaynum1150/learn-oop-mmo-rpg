@@ -1,6 +1,7 @@
 package learn.oop.domain.character.player;
 
 import learn.oop.domain.behavior.attack.Attackable;
+import learn.oop.domain.behavior.attack.Damage;
 import learn.oop.domain.character.Character;
 import learn.oop.domain.items.armor.Armor;
 import learn.oop.domain.items.weapon.Weapon;
@@ -29,7 +30,10 @@ public class Player extends Character implements Attackable {
     }
 
     public int getDefenceScore() {
-        return defenceScore;
+        if (this.armor != null) {
+            return  this.defenceScore + this.armor.getDefenceScore();
+        }
+        return this.defenceScore;
     }
 
     public void setDefenceScore(int defenceScore) {
@@ -37,7 +41,10 @@ public class Player extends Character implements Attackable {
     }
 
     public int getAttackScore() {
-        return attackScore;
+        if (this.weapon != null) {
+            return this.attackScore + this.weapon.getAttackScore();
+        }
+        return this.attackScore;
     }
 
     public void setAttackScore(int attackScore) {
@@ -57,7 +64,13 @@ public class Player extends Character implements Attackable {
     }
 
     public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
+        weapon.use();
+        if (weapon.canUse(this)) {
+            System.out.println("Set weapon done.");
+            this.weapon = weapon;
+        } else {
+            System.out.println("Can't use this weapon.");
+        }
     }
 
     public Armor getArmor() {
@@ -65,16 +78,35 @@ public class Player extends Character implements Attackable {
     }
 
     public void setArmor(Armor armor) {
+        armor.use();
         this.armor = armor;
     }
 
     @Override
-    public void attack() {
-
+    public Damage attack() {
+        Damage damage = new Damage();
+        damage.setAttackType(this.job.getAttackType());
+        damage.setDamageScore(getAttackScore());
+        return damage;
     }
 
     @Override
-    public void gotAttack() {
+    public void gotAttack(Damage damage) {
+        int realDamage = Math.max(0, damage.getDamageScore() - getDefenceScore());
+        System.out.println(this.getName() + " got " + realDamage + " damage.");
+        this.setHp(Math.max(0, this.getHp() - realDamage));
+    }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name=" + getName() +
+                ", hp=" + getHp() +
+                ", defenceScore=" + defenceScore +
+                ", attackScore=" + attackScore +
+                ", job=" + job +
+                ", weapon=" + weapon +
+                ", armor=" + armor +
+                '}';
     }
 }

@@ -2,6 +2,8 @@ package learn.oop.domain.jobs;
 
 import learn.oop.domain.behavior.attack.AttackType;
 
+import java.util.Objects;
+
 public abstract class Job {
     private final AttackType attackType;
 

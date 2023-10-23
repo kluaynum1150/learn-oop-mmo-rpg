@@ -15,7 +15,10 @@ public abstract class Character {
     }
 
     public boolean isDied() {
-        return this.hp <= 0;
+        if (this.hp <= 0) {
+            return true;
+        }
+        return false;
     }
 
     public String getName() {

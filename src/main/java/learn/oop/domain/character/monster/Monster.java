@@ -1,6 +1,8 @@
 package learn.oop.domain.character.monster;
 
+import learn.oop.domain.behavior.attack.AttackType;
 import learn.oop.domain.behavior.attack.Attackable;
+import learn.oop.domain.behavior.attack.Damage;
 import learn.oop.domain.character.Character;
 
 public class Monster extends Character implements Attackable {
@@ -40,12 +42,35 @@ public class Monster extends Character implements Attackable {
     }
 
     @Override
-    public void attack() {
-
+    public Damage attack() {
+        Damage damage = new Damage();
+        damage.setDamageScore(getAttackScore());
+        return damage;
     }
 
     @Override
-    public void gotAttack() {
+    public void gotAttack(Damage damage) {
+        int realDamage;
+        if (damage.getAttackType() == AttackType.PHYSICAL) {
+            realDamage = Math.max(0, damage.getDamageScore() - getPhysicalDefend());
+        } else if (damage.getAttackType() == AttackType.MAGIC) {
+            realDamage = Math.max(0, damage.getDamageScore() - getMagicDefend());
+        } else {
+            System.out.println("Attack type unknown");
+            return;
+        }
+        System.out.println(this.getName() + " got " + realDamage + " damage.");
+        this.setHp(Math.max(0, this.getHp() - realDamage));
+    }
 
+    @Override
+    public String toString() {
+        return "Monster{" +
+                "name=" + getName() +
+                ", hp=" + getHp() +
+                ", physicalDefend=" + physicalDefend +
+                ", magicDefend=" + magicDefend +
+                ", attackScore=" + attackScore +
+                '}';
     }
 }

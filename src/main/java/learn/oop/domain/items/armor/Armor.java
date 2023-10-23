@@ -13,7 +13,7 @@ public class Armor implements Item {
 
     @Override
     public void use() {
-
+        System.out.println("Use " + this.name);
     }
 
     public String getName() {
@@ -22,5 +22,13 @@ public class Armor implements Item {
 
     public int getDefenceScore() {
         return defenceScore;
+    }
+
+    @Override
+    public String toString() {
+        return "Armor{" +
+                "name='" + name + '\'' +
+                ", defenceScore=" + defenceScore +
+                '}';
     }
 }

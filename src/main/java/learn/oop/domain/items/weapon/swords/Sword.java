@@ -10,6 +10,6 @@ public class Sword extends Weapon {
 
     @Override
     public void use() {
-
+        System.out.println("Use " + this.getName());
     }
 }
